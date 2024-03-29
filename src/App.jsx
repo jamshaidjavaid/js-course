@@ -1,11 +1,10 @@
 import "./App.css";
-import Form from "./Form";
-import HomePage from "./HomePage";
+import TodoPage from "./pages/TodoPage";
 
 function App() {
   return (
     <div className="app-main-container">
-      <HomePage />
+      <TodoPage />
     </div>
   );
 }
