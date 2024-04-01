@@ -38,7 +38,7 @@ const TodoPage = () => {
     <div className="todo-page-container">
       <div className="container">
         <form onSubmit={onSubmit}>
-        <input 
+        <input className="input-name"
         name="Name" 
         id="Name" 
         placeholder="Enter your name" 
