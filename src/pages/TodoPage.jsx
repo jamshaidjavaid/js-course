@@ -4,70 +4,94 @@ import "./TodoPage.scss";
 // Need have a form - input & button
 // state which will be updated on submit form
 // list of todos
+// Errors and Routing
+
+const initialState = {
+  todo: "",
+  name: "",
+  time: "",
+};
 
 const TodoPage = () => {
   const [todos, setTodos] = useState([]);
-  const [todo, setTodo] = useState("");
-  const [name, setName] = useState("");
-  const [time, setTime] = useState("");
+  const [formValues, setFormValues] = useState(initialState);
+  const [errors, setErrors] = useState(initialState);
 
   const handleInputChange = (event) => {
-    setTodo(event.target.value);
-  };
-  const handleNameChange = (event) => {
-    setName(event.target.value);
-  };
-
-  const handleTimeChange = (event) => {
-    setTime(event.target.value);
+    const { value, name } = event.target;
+    // console.log(value, "value", name, "name");
+    setFormValues({ ...formValues, [name]: value });
   };
 
-  
+  const validateForm = () => {
+    let isValid = true;
+    let errorsCopy = { ...errors };
+
+    Object.entries(formValues).forEach((el) => {
+      console.log(el, "single form key value pair");
+      if (!el[1]) {
+        errorsCopy = { ...errorsCopy, [el[0]]: `Please write ${el[0]}!` };
+        isValid = false;
+      }
+    });
+
+    setErrors(errorsCopy);
+
+    return isValid;
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
-    if (!name || !time) return;
 
-    setTodos([...todos,{todo,name,time}]);
-    setTodo("");
-    setName("");
-    setTime("");
+    const formValidation = validateForm();
+    if (!formValidation) {
+      return;
+    }
 
+    setTodos([...todos, formValues]);
   };
 
   return (
     <div className="todo-page-container">
       <div className="container">
         <form onSubmit={onSubmit}>
-        <input className="input-name"
-        name="Name" 
-        id="Name" 
-        placeholder="Enter your name" 
-        type="text"
-        value={name}
-        onChange={handleNameChange } />
-        
+          <input
+            className="input-name"
+            name="name"
+            id="name"
+            placeholder="Enter your name"
+            type="text"
+            value={formValues.name}
+            onChange={handleInputChange}
+          />
+          {errors.name && <p className="error-message">{errors.name}</p>}
+
           <input
             name="todo"
             id="todo"
             placeholder="What needs to be done?"
             type="text"
-            value={todo}
+            value={formValues.todo}
             onChange={handleInputChange}
-            />
-            <input
-            name="time" 
-            id="time" 
+          />
+          {errors.todo && <p className="error-message">{errors.todo}</p>}
+
+          <input
+            name="time"
+            id="time"
             type="time"
-            value={time}
-            onChange={handleTimeChange}
-            />
+            value={formValues.time}
+            onChange={handleInputChange}
+          />
+          {errors.time && <p className="error-message">{errors.time}</p>}
+
           <button>Submit</button>
         </form>
         <div className="all-todos-container">
           <h4>My All Todos</h4>
           {todos.map((item) => (
             <div key={item} className="single-item">
-            <h6>{item.todo}</h6>
+              <h6>{item.todo}</h6>
               <p>Name: {item.name}</p>
               <p>Time: {item.time}</p>
             </div>
