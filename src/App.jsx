@@ -1,4 +1,5 @@
 import "./App.css";
+import SocilaMediaForm from "./pages/SocialMediaForm";
 import TodoPage from "./pages/TodoPage";
 import Booking from "./pages/Booking";
 import { Routes, Route } from "react-router-dom";
