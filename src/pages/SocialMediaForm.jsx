@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import './SocialMediaForm.scss';
+import React, { useState } from "react";
+import "./SocialMediaForm.scss";
 import { FiSend } from "react-icons/fi";
 
 const SocialMediaForm = () => {
   const [formData, setFormData] = useState([]);
   const [newPost, setNewPost] = useState({
-    image: '',
-    title: '',
-    description: '',
-    postedBy: '',
+    image: "",
+    title: "",
+    description: "",
+    postedBy: "",
   });
   const [errors, setErrors] = useState({});
 
@@ -26,19 +26,21 @@ const SocialMediaForm = () => {
 
     Object.entries(newPost).forEach(([key, value]) => {
       if (!value) {
-        newErrors[key] = `${key.slice(0, 1).toUpperCase()}${key.slice(1)} is required`;
+        newErrors[key] = `${key.slice(0, 1).toUpperCase()}${key.slice(
+          1
+        )} is required`;
       }
-    });//soru
+    }); //soru
 
     if (Object.keys(newErrors).length === 0) {
       // formdata ya yeni post ekleme yapilir
       setFormData([...formData, newPost]);
       // submitten sonra form alanini temislemek icin
       setNewPost({
-        image: '',
-        title: '',
-        description: '',
-        postedBy: '',
+        image: "",
+        title: "",
+        description: "",
+        postedBy: "",
       });
       setErrors({});
     } else {
@@ -47,13 +49,13 @@ const SocialMediaForm = () => {
   };
 
   return (
-    <div className='form-main-container'>
+    <div className="form-main-container">
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="image">Image URL</label>
-          <br/>
+          <br />
           <input
-          className='image-input'
+            className="image-input"
             type="text"
             id="image"
             name="image"
@@ -64,7 +66,7 @@ const SocialMediaForm = () => {
         </div>
         <div>
           <label htmlFor="title">Title</label>
-          <br/>
+          <br />
           <input
             type="text"
             id="title"
@@ -76,7 +78,7 @@ const SocialMediaForm = () => {
         </div>
         <div>
           <label htmlFor="description">Description</label>
-          <br/>
+          <br />
           <input
             id="description"
             name="description"
@@ -87,7 +89,7 @@ const SocialMediaForm = () => {
         </div>
         <div>
           <label htmlFor="postedBy">Posted by</label>
-          <br/>
+          <br />
           <input
             type="text"
             id="postedBy"
@@ -97,10 +99,12 @@ const SocialMediaForm = () => {
           />
           {errors.postedBy && <p className="error">{errors.postedBy}</p>}
         </div>
-        <button className='btn'  type="submit">Submit <FiSend className='icon'/></button>
+        <button className="btn" type="submit">
+          Submit <FiSend className="icon" />
+        </button>
       </form>
       <div className="formData-container">
-        <h4 className='new-posts'>New Posts</h4>
+        <h4 className="new-posts">New Posts</h4>
         {formData.map((item, index) => (
           <div key={index} className="post">
             <img src={item.image} alt={item.title} />
