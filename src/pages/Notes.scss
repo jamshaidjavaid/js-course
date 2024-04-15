@@ -1,0 +1,56 @@
+.notes-page-main-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+
+  h1 {
+    text-align: center;
+  }
+
+  form {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    input {
+      height: 45px;
+      border-radius: 8px;
+      width: 70%;
+    }
+    button {
+      height: 45px;
+      border-radius: 8px;
+      width: 70%;
+      cursor: pointer;
+    }
+    .error-message {
+      color: red;
+      margin-top: 5px;
+    }
+  }
+
+  .all-notes-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    width: 500px;
+    border-top: 2px solid blue;
+    padding: 20px 0px;
+    .note-container {
+      padding: 5px;
+      border: 1px solid black;
+      width: 100%;
+      .side-by-side {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+}

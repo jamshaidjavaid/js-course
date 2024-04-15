@@ -5,6 +5,7 @@ import Booking from "./pages/Booking";
 import { Routes, Route } from "react-router-dom";
 import BookingDetails from "./pages/BookingDetails";
 import SocialMediaForm from "./pages/SocialMediaForm";
+import Notes from "./pages/Notes";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           path="/booking/:bookingId/details"
           element={<BookingDetails />}
         />
+        <Route path="/notes" element={<Notes />} />
       </Routes>
     </div>
   );
