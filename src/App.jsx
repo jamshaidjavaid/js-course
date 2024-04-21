@@ -6,6 +6,7 @@ import { Routes, Route } from "react-router-dom";
 import BookingDetails from "./pages/BookingDetails";
 import SocialMediaForm from "./pages/SocialMediaForm";
 import Notes from "./pages/Notes";
+import SubscriptionForm from "./pages/SubscriptionForm";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           element={<BookingDetails />}
         />
         <Route path="/notes" element={<Notes />} />
+        <Route path="/subscriptionForm" element={<SubscriptionForm/>} />
       </Routes>
     </div>
   );

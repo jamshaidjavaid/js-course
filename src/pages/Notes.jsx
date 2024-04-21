@@ -87,7 +87,7 @@ const Notes = () => {
       <div className="all-notes-container">
         {allNotes.map((el) => {
           return (
-            <div className="note-container">
+            <div key={el} className="note-container">
               <h5>{el.note}</h5>
               <div className="side-by-side">
                 <p>{new Date(el.createdAt).toLocaleString()}</p>{" "}
