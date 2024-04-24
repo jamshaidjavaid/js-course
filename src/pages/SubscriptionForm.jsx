@@ -55,7 +55,7 @@ const SubscriptionForm = () => {
 
   useEffect(() => {
     getAllSubcriptions();
-  }, []);
+  }, []); // dependency array
 
   return (
     <div className="subscription-form-main-container">
