@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Notes.scss";
-
-const BASE_URL = "https://65a6bb5e74cf4207b4f0b871.mockapi.io/api/v1/";
+import { BASE_URL } from "../../constants";
 
 const initialState = { note: "" };
 
