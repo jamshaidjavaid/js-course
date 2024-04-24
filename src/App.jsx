@@ -7,6 +7,7 @@ import BookingDetails from "./pages/BookingDetails";
 import SocialMediaForm from "./pages/SocialMediaForm";
 import Notes from "./pages/Notes";
 import SubscriptionForm from "./pages/SubscriptionForm";
+import FormExample from "./pages/FormExample";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         />
         <Route path="/notes" element={<Notes />} />
         <Route path="/subscriptionForm" element={<SubscriptionForm/>} />
+        <Route path="/formExample" element={<FormExample />} />
       </Routes>
     </div>
   );
