@@ -47,6 +47,7 @@ const FormExample = () => {
         
             //! isValid değeri fonksiyon sonucu olarak döndürülüyor.
             return isValid;
+            
         };
 
 
@@ -69,8 +70,8 @@ const FormExample = () => {
     minLength={3}
     maxLength={33}
     required
-
     />
+    {errors.formData && <p className="error-message">{errors.formData}</p>}
     <input type="text"
     placeholder="Enter your lastname"
     name='lastname'
@@ -81,6 +82,7 @@ const FormExample = () => {
     required
 
     />
+    {errors.formData && <p className="error-message">{errors.formData}</p>}
     <input type="number"
     placeholder="Enter your phone number"
     name='phonenumber'
@@ -89,6 +91,7 @@ const FormExample = () => {
     required
 
     />
+   {errors.formData && <p className="error-message">{errors.formData}</p>}
 
     <input type="email"
     placeholder="Enter your email"
@@ -100,6 +103,7 @@ const FormExample = () => {
     required
 
     />
+    {errors.formData && <p className="error-message">{errors.formData}</p>}
     <input type="password"
     placeholder="Enter your password"
     name='password'
@@ -109,6 +113,7 @@ const FormExample = () => {
     // maxLength={33}
     required
     />
+    {errors.formData && <p className="error-message">{errors.formData}</p>}
     <button>Submit</button>
       
     </form>
