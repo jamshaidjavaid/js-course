@@ -37,6 +37,7 @@ const Notes = () => {
     if (validateForm()) {
       console.log("call api to submit", formValues);
 
+
       try {
         const response = await axios.post(`${BASE_URL}notes`, {
           note: formValues.note,
@@ -57,7 +58,7 @@ const Notes = () => {
   const getAllNotes = async () => {
     console.log("getting all the notes");
     try {
-      const response = await axios.get(`${BASE_URL}notes`);
+      const response = await axios.get(`${BASE_URL}notes`);//! get methodu veri alimi icin kullanilir, eger Get metodu kullaniliyorsa o zaman sadece BASE_URL yazilir.
       setAllNotes(response.data);
     } catch (error) {
       console.log("error while getting", error);

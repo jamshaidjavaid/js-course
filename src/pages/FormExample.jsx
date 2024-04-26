@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./FormExample.scss";
+import axios from "axios";
+const BASE_URL = "https://65a14023600f49256fb1429c.mockapi.io/api/v1/";
+
 
 const initialState = {
   firstName: "",
   lastName: "",
-  phone: "",
+  phoneNumber: "",
   email: "",
   password: "",
 };
@@ -12,6 +15,7 @@ const initialState = {
 const FormExample = () => {
   const [formData, setFormData] = useState(initialState);
   const [errors, setErrors] = useState(initialState);
+  
 
   const onInputChange = (e) => {
     const { value, name } = e.target;
@@ -43,11 +47,40 @@ const FormExample = () => {
     return isValid;
   };
 
-  const FormSubmit = (e) => {
+  const FormSubmit = async (e) => {
     e.preventDefault(); //! her veri girilisinde sayfa yenilenmesini engelledik.
+    if(validateForm()){
+      //! API cagir submit icin eger hata yoksa
+      try {
+        const response = await axios.post(`${BASE_URL}/formExample`,{
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          phoneNumber:formData.phoneNumber,
+          email:formData.email,
+          password: formData.password,
+
+        });
+        
+      } catch (error) {
+        console.log("error");
+        
+      }
+
+    }else{
+      console.log("form is not submitted");  
+    }
     setFormData(initialState); //! formu submitten sonra  doldurulan verileri formdan temizledik.
     console.log(formData);
   };
+
+  // useEffect(() => {//! callback alir icine. ne verirsek callback icine o cagirirlir GET methodu varsa yani veri cagiriyorsak API den ozaman bu hook kullanilir
+  //   first
+  
+  //   return () => {
+  //     second
+  //   }
+  // }, [])
+  
 
   return (
     <div className="formDiv-main-container">
@@ -58,7 +91,7 @@ const FormExample = () => {
             placeholder="Enter your firstname"
             name="firstname"
             onChange={onInputChange}
-            value={formData.firstname}
+            value={formData.firstName}
             minLength={3}
             maxLength={33}
             required
@@ -67,27 +100,32 @@ const FormExample = () => {
             <p className="error-message">{errors.formData}</p>
           )}
         </div>
+        <div>
 
         <input
           type="text"
           placeholder="Enter your lastname"
           name="lastname"
           onChange={onInputChange}
-          value={formData.lastname}
+          value={formData.lastName}
           minLength={3}
           maxLength={33}
           required
         />
         {errors.formData && <p className="error-message">{errors.formData}</p>}
+        </div>
+        <div>
         <input
           type="number"
           placeholder="Enter your phone number"
-          name="phonenumber"
+          name="phoneNumber"
           onChange={onInputChange}
-          value={formData.phonenumber}
+          value={formData.phoneNumber}
           required
         />
         {errors.formData && <p className="error-message">{errors.formData}</p>}
+        </div>
+        <div>
 
         <input
           type="email"
@@ -100,6 +138,8 @@ const FormExample = () => {
           required
         />
         {errors.formData && <p className="error-message">{errors.formData}</p>}
+        </div>
+        <div>
         <input
           type="password"
           placeholder="Enter your password"
@@ -111,6 +151,7 @@ const FormExample = () => {
           required
         />
         {errors.formData && <p className="error-message">{errors.formData}</p>}
+        </div>
         <button>Submit</button>
       </form>
     </div>
