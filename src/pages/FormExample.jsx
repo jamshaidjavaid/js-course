@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./FormExample.scss";
 import axios from "axios";
 const BASE_URL = "https://65a14023600f49256fb1429c.mockapi.io/api/v1/";
@@ -62,7 +62,7 @@ const FormExample = () => {
         });
         
       } catch (error) {
-        console.log("error");
+        console.log(error);
         
       }
 
@@ -73,13 +73,6 @@ const FormExample = () => {
     console.log(formData);
   };
 
-  // useEffect(() => {//! callback alir icine. ne verirsek callback icine o cagirirlir GET methodu varsa yani veri cagiriyorsak API den ozaman bu hook kullanilir
-  //   first
-  
-  //   return () => {
-  //     second
-  //   }
-  // }, [])
   
 
   return (
@@ -89,7 +82,7 @@ const FormExample = () => {
           <input
             type="text"
             placeholder="Enter your firstname"
-            name="firstname"
+            name="firstName"
             onChange={onInputChange}
             value={formData.firstName}
             minLength={3}
@@ -105,7 +98,7 @@ const FormExample = () => {
         <input
           type="text"
           placeholder="Enter your lastname"
-          name="lastname"
+          name="lastName"
           onChange={onInputChange}
           value={formData.lastName}
           minLength={3}

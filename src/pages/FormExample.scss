@@ -28,9 +28,17 @@
         border: 1.5px solid;
         border-radius: 10px;
         background-color: rgb(153, 157, 157);
-      
+        
+        .error-message{
+            color: red;
+            margin-top: 5px;
+        }
        
     }
+    
+
+
+
     button{
         margin: auto;
         align-items: center;
@@ -42,9 +50,6 @@
 
         
     }
-    .error-message{
-        color: red;
-        margin-top: 5px;
-    }
+    
 
 }
