@@ -37,7 +37,6 @@ const Notes = () => {
     if (validateForm()) {
       console.log("call api to submit", formValues);
 
-
       try {
         const response = await axios.post(`${BASE_URL}notes`, {
           note: formValues.note,
@@ -58,7 +57,7 @@ const Notes = () => {
   const getAllNotes = async () => {
     console.log("getting all the notes");
     try {
-      const response = await axios.get(`${BASE_URL}notes`);//! get methodu veri alimi icin kullanilir, eger Get metodu kullaniliyorsa o zaman sadece BASE_URL yazilir.
+      const response = await axios.get(`${BASE_URL}notes`); //! get methodu veri alimi icin kullanilir, eger Get metodu kullaniliyorsa o zaman sadece BASE_URL yazilir.
       setAllNotes(response.data);
     } catch (error) {
       console.log("error while getting", error);
@@ -68,6 +67,28 @@ const Notes = () => {
   useEffect(() => {
     getAllNotes();
   }, []);
+
+  const deleteNote = async (id) => {
+    try {
+      const response = await axios.delete(`${BASE_URL}notes/${id}`);
+      getAllNotes();
+    } catch (error) {
+      console.log("error while getting", error);
+    }
+  };
+
+  const markAsCompleted = async (data) => {
+    console.log(data, "to be updated");
+    try {
+      const response = await axios.put(`${BASE_URL}notes/${data.id}`, {
+        ...data,
+        completed: true,
+      });
+      getAllNotes();
+    } catch (error) {
+      console.log("error while getting", error);
+    }
+  };
 
   return (
     <div className="notes-page-main-container">
@@ -89,6 +110,19 @@ const Notes = () => {
           return (
             <div key={el} className="note-container">
               <h5>{el.note}</h5>
+              <div className="buttons-container">
+                <button onClick={() => markAsCompleted(el)} className="update">
+                  Mark as completed
+                </button>
+                <button
+                  onClick={() => {
+                    deleteNote(el.id);
+                  }}
+                  className="delete"
+                >
+                  Delete
+                </button>
+              </div>
               <div className="side-by-side">
                 <p>{new Date(el.createdAt).toLocaleString()}</p>{" "}
                 <p>Completed: {el.completed ? "Yes" : "No"}</p>

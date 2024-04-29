@@ -45,9 +45,33 @@
     padding: 20px 0px;
     .note-container {
       padding: 5px;
+      min-height: 60px;
       border: 1px solid black;
       width: 100%;
+      position: relative;
+      .buttons-container {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        .update {
+          background-color: rgb(9, 9, 50);
+          color: white;
+          border: none;
+          cursor: pointer;
+        }
+        .delete {
+          background-color: rgb(255, 0, 0);
+          color: white;
+          border: none;
+          cursor: pointer;
+        }
+      }
       .side-by-side {
+        margin-top: 20px;
         display: flex;
         justify-content: space-between;
       }

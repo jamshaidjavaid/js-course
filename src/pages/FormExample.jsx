@@ -3,7 +3,6 @@ import "./FormExample.scss";
 import axios from "axios";
 const BASE_URL = "https://65a14023600f49256fb1429c.mockapi.io/api/v1/";
 
-
 const initialState = {
   firstName: "",
   lastName: "",
@@ -15,7 +14,6 @@ const initialState = {
 const FormExample = () => {
   const [formData, setFormData] = useState(initialState);
   const [errors, setErrors] = useState(initialState);
-  
 
   const onInputChange = (e) => {
     const { value, name } = e.target;
@@ -28,17 +26,30 @@ const FormExample = () => {
     let isValid = true;
     let errorsCopy = { ...errors };
 
-    //! formData'nın her bir öğesi üzerinde döngü oluşturuluyor.
-    Object.entries(formData).forEach((el) => {
-      //!Eğer formData'nın bir öğesi boş veya false değerine sahipse,
-      if (!el[1]) {
-        //! errorsCopy objesine yeni bir hata mesajı ekleniyor.
-        //! Örneğin, formData'nın bir öğesi 'name' ise, hata mesajı 'Please write name!' olacak.
-        errorsCopy = { ...errorsCopy, [el[0]]: `Please write ${el[0]}!` };
-        //! isValid değeri false olarak güncelleniyor.
-        isValid = false;
-      }
-    });
+    if (!formData.firstName) {
+      isValid = false;
+      errorsCopy.firstName = "First name is required";
+    }
+
+    if (!formData.lastName) {
+      isValid = false;
+      errorsCopy.lastName = "Last name is required";
+    }
+
+    if (!formData.password) {
+      isValid = false;
+      errorsCopy.password = "Password is required";
+    }
+
+    if (!formData.email) {
+      isValid = false;
+      errorsCopy.email = "Email is required";
+    }
+
+    if (!formData.phoneNumber) {
+      isValid = false;
+      errorsCopy.phoneNumber = "Phone number is required";
+    }
 
     //! errorsCopy objesini state'teki errors objesine atanıyor.
     setErrors(errorsCopy);
@@ -49,31 +60,26 @@ const FormExample = () => {
 
   const FormSubmit = async (e) => {
     e.preventDefault(); //! her veri girilisinde sayfa yenilenmesini engelledik.
-    if(validateForm()){
+    if (validateForm()) {
       //! API cagir submit icin eger hata yoksa
       try {
-        const response = await axios.post(`${BASE_URL}/formExample`,{
+        const response = await axios.post(`${BASE_URL}/formExample`, {
           firstName: formData.firstName,
           lastName: formData.lastName,
-          phoneNumber:formData.phoneNumber,
-          email:formData.email,
+          phoneNumber: formData.phoneNumber,
+          email: formData.email,
           password: formData.password,
-
         });
-        
+
+        setFormData(initialState); //! formu submitten sonra  doldurulan verileri formdan temizledik.
       } catch (error) {
         console.log(error);
-        
       }
-
-    }else{
-      console.log("form is not submitted");  
+    } else {
+      console.log("form is not submitted");
     }
-    setFormData(initialState); //! formu submitten sonra  doldurulan verileri formdan temizledik.
     console.log(formData);
   };
-
-  
 
   return (
     <div className="formDiv-main-container">
@@ -87,63 +93,62 @@ const FormExample = () => {
             value={formData.firstName}
             minLength={3}
             maxLength={33}
-            required
           />
-          {errors.formData && (
-            <p className="error-message">{errors.formData}</p>
+          {errors.firstName && (
+            <p className="error-message">{errors.firstName}</p>
           )}
         </div>
         <div>
-
-        <input
-          type="text"
-          placeholder="Enter your lastname"
-          name="lastName"
-          onChange={onInputChange}
-          value={formData.lastName}
-          minLength={3}
-          maxLength={33}
-          required
-        />
-        {errors.formData && <p className="error-message">{errors.formData}</p>}
+          <input
+            type="text"
+            placeholder="Enter your lastname"
+            name="lastName"
+            onChange={onInputChange}
+            value={formData.lastName}
+            minLength={3}
+            maxLength={33}
+          />
+          {errors.lastName && (
+            <p className="error-message">{errors.lastName}</p>
+          )}
         </div>
         <div>
-        <input
-          type="number"
-          placeholder="Enter your phone number"
-          name="phoneNumber"
-          onChange={onInputChange}
-          value={formData.phoneNumber}
-          required
-        />
-        {errors.formData && <p className="error-message">{errors.formData}</p>}
+          <input
+            type="number"
+            placeholder="Enter your phone number"
+            name="phoneNumber"
+            onChange={onInputChange}
+            value={formData.phoneNumber}
+          />
+          {errors.phoneNumber && (
+            <p className="error-message">{errors.phoneNumber}</p>
+          )}
         </div>
         <div>
-
-        <input
-          type="email"
-          placeholder="Enter your email"
-          name="email"
-          onChange={onInputChange}
-          value={formData.email}
-          // minLength={3}
-          // maxLength={33}
-          required
-        />
-        {errors.formData && <p className="error-message">{errors.formData}</p>}
+          <input
+            type="email"
+            placeholder="Enter your email"
+            name="email"
+            onChange={onInputChange}
+            value={formData.email}
+            // minLength={3}
+            // maxLength={33}
+          />
+          {errors.email && <p className="error-message">{errors.email}</p>}
         </div>
         <div>
-        <input
-          type="password"
-          placeholder="Enter your password"
-          name="password"
-          onChange={onInputChange}
-          value={formData.password}
-          // minLength={3}
-          // maxLength={33}
-          required
-        />
-        {errors.formData && <p className="error-message">{errors.formData}</p>}
+          <input
+            type="password"
+            placeholder="Enter your password"
+            name="password"
+            onChange={onInputChange}
+            value={formData.password}
+            // minLength={3}
+            // maxLength={33}
+          />
+          {errors.password && (
+            <p className="error-message">{errors.password}</p>
+          )}
         </div>
         <button>Submit</button>
       </form>

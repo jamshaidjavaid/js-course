@@ -21,7 +21,7 @@ function App() {
           element={<BookingDetails />}
         />
         <Route path="/notes" element={<Notes />} />
-        <Route path="/subscriptionForm" element={<SubscriptionForm/>} />
+        <Route path="/subscriptionForm" element={<SubscriptionForm />} />
         <Route path="/formExample" element={<FormExample />} />
       </Routes>
     </div>
@@ -29,3 +29,5 @@ function App() {
 }
 
 export default App;
+
+// CRUD - Create, Read, Update, Delete
