@@ -21,7 +21,7 @@ const Forms = () => {
 
         console.log(userName , "username");
        await axios.post('https://jsonplaceholder.typicode.com/users', {
-            //body icindeki bilgileri burdan gondeririz 
+            //*body icindeki bilgileri burdan gondeririz 
             userName: userName
         })
        
