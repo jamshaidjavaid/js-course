@@ -8,6 +8,7 @@ import SocialMediaForm from "./pages/SocialMediaForm";
 import Notes from "./pages/Notes";
 import SubscriptionForm from "./pages/SubscriptionForm";
 import FormExample from "./pages/FormExample";
+import Forms from "./pages/Forms";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/notes" element={<Notes />} />
         <Route path="/subscriptionForm" element={<SubscriptionForm />} />
         <Route path="/formExample" element={<FormExample />} />
+        <Route path="/Forms" element={<Forms/>} />
       </Routes>
     </div>
   );
