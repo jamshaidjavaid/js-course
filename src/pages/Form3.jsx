@@ -9,7 +9,7 @@ const Form3 = () => {
         phoneNumber: "",
         email: "",
         gender: "",
-        terms: false,
+        terms: "",
     };
 
     const [formValues, setFormValues] = useState(initialState);
